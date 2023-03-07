@@ -10,7 +10,7 @@ namespace serviceTestTassk.Models
         public Building Building { get; set; }
         public int EquipmentId { get; set; }
         [JsonIgnore]
-        public Building Equipment { get; set; }
+        public Equipment Equipment { get; set; }
         public int CountEquipment { get; set; } = 0;
     }
 }

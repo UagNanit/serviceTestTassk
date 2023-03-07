@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using serviceTestTassk.Models;
+using serviceTestTassk.Data;
+
 
 namespace serviceTestTassk.Controllers
 {
@@ -12,10 +15,12 @@ namespace serviceTestTassk.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ApplicationContext _applicationContext;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, ApplicationContext applicationContext)
         {
             _logger = logger;
+            _applicationContext = applicationContext;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
