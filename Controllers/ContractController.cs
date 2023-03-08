@@ -43,7 +43,7 @@ namespace serviceTestTassk.Controllers
             return Ok();
         }
 
-        [Route("contracts/")]
+        [Route("contracts")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetContractsViewModel>>> GetContractsAsync()
         {
