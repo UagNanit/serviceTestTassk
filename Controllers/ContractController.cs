@@ -6,6 +6,12 @@ using serviceTestTassk.Data;
 using serviceTestTassk.Models;
 using serviceTestTassk.Models.ViewModels;
 using System.Data;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Azure;
 
 namespace serviceTestTassk.Controllers
 {
@@ -63,6 +69,25 @@ namespace serviceTestTassk.Controllers
                 });
             }
             return Ok(contracts);
+        }
+
+        [Route("upload")]
+        [HttpPost]
+        public async Task<ActionResult> UploadAsync(IFormFile uploadedFile)
+        {
+            if (uploadedFile != null)
+            {
+                var uploadPath = $"{Directory.GetCurrentDirectory()}/upload";
+                Directory.CreateDirectory(uploadPath);
+                using (var fileStream = new FileStream(uploadPath+ "/" + uploadedFile.FileName, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+                FileModel file = new FileModel { Name = uploadedFile.FileName, Path = "/uploads/" + uploadedFile.FileName};
+               
+            }
+            
+            return Ok("Файлы успешно загружены");
         }
     }
 }
