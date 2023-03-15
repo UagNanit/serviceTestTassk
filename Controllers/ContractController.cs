@@ -83,11 +83,13 @@ namespace serviceTestTassk.Controllers
                 {
                     await uploadedFile.CopyToAsync(fileStream);
                 }
-                FileModel file = new FileModel { Name = uploadedFile.FileName, Path = "/uploads/" + uploadedFile.FileName};
-               
+                //FileModel file = new FileModel { Name = uploadedFile.FileName, Path = "/uploads/" + uploadedFile.FileName};
+                return Ok("Файлы успешно загружены");
             }
-            
-            return Ok("Файлы успешно загружены");
+
+            return BadRequest();
+
+
         }
     }
 }
